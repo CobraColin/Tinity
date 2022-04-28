@@ -8,7 +8,7 @@
 
 
 
-	Source:
+	Source: https://raw.githubusercontent.com/CobraColin/Tinity/main/Tinity.lua
 		
 	Author: 
 		The guy who i stole this from: https://v3rmillion.net/member.php?action=profile&uid=56196
