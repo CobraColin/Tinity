@@ -9,11 +9,13 @@
 
 
 	Source: https://raw.githubusercontent.com/CobraColin/Tinity/main/Tinity.lua
+
+	Documentation: 
 		
 	Author: 
 		The guy who i stole this from: https://v3rmillion.net/member.php?action=profile&uid=56196
 		The guy who modified it: 
-					
+	
 --]]
 
 
@@ -295,11 +297,14 @@ function Tinity.new(isdark, gprojectName, thinProject,customtheme)
 		self2.tip.Text = "Press '".. string.sub(tostring(self.ToggleKey), 14) .."' to hide this menu"
 	end
     
-    self2.settitle = function(text)
-		projectName = text
-		self2.tip.Text = tostring(text)
+	self2.settitle = function(newtitle)
+		self2.tip.Text = tostring(newtitle)
 	end
 
+	self2.setname = function(newname)
+		projectName = tostring(newname)
+		self2.tip.Text = projectName
+	end
 
 	local separator = self:Create("Frame", {
 		Name = "Separator",
@@ -483,6 +488,13 @@ function Tinity.new(isdark, gprojectName, thinProject,customtheme)
 		category.L.Parent = category.container
 		category.hider.Parent = category.container
 
+
+
+		category.settitle = function(newtitle)
+			category.button.Text = tostring(newtitle)
+		end
+
+
 		local function calculateSector()
 			if thinProject then
 				return "L"
@@ -535,6 +547,11 @@ function Tinity.new(isdark, gprojectName, thinProject,customtheme)
 				SortOrder = Enum.SortOrder.LayoutOrder
 			})
 
+			sector.settitle = function(newtitle)
+				sector.title.Text = tostring(newtitle)
+			end
+
+	
             uilistlayout.Changed:Connect(function()
                 pcall(function()
                     sector.frame.Size = UDim2.new(1, 0, 0, sector.container["UIListLayout"].AbsoluteContentSize.Y + 25)
@@ -547,7 +564,7 @@ function Tinity.new(isdark, gprojectName, thinProject,customtheme)
 			function sector:Cheat(kind, name, callback, data)
 				local cheat = {}
 				cheat.value = nil
-
+				
 				cheat.frame = Tinity:Create("Frame", {
 					Name = name,
 					BackgroundColor3 = Color3.new(1, 1, 1),
@@ -1329,11 +1346,11 @@ function Tinity.new(isdark, gprojectName, thinProject,customtheme)
 						local callback_bind 
 						local sr, rr = pcall(function()
 							local s, r = pcall(function()
-								local key = Enum.KeyCode[callback_bind]
+								local key = Enum.KeyCode[data.bind]
 								callback_bind = key
 								key = nil
 							end)
-							local key = Enum.UserInputType[callback_bind]
+							local key = Enum.UserInputType[data.bind]
 							callback_bind = key
 							key = nil
 						end)
