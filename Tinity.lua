@@ -1155,7 +1155,7 @@ function Tinity.new(isdark, gprojectName, thinProject,customtheme)
                             }):Play()
                             if callback then
 								local s, e = pcall(function()
-									callback(cheat.value)
+									callback(data.default)
 								end)
 
 								if not s then warn("error: ".. e) end
